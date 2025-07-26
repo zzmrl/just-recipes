@@ -1,2 +1,22 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<div class="hero min-h-screen bg-base-200">
+	<div class="hero-content text-center">
+		<div class="flex max-w-lg flex-col gap-6">
+			<h1 class="text-5xl font-bold">Just Recipes</h1>
+			<label class="input">
+				<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<g
+						stroke-linejoin="round"
+						stroke-linecap="round"
+						stroke-width="2.5"
+						fill="none"
+						stroke="currentColor"
+					>
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.3-4.3"></path>
+					</g>
+				</svg>
+				<input type="search" class="grow" placeholder="Search" />
+			</label>
+		</div>
+	</div>
+</div>
