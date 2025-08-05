@@ -1,6 +1,11 @@
 <script lang="ts">
 	import CloseIcon from './CloseIcon.svelte';
 
+	interface Props {
+		autofocus?: boolean;
+	}
+
+	const { autofocus }: Props = $props();
 	let value = $state('');
 	let inputElement: HTMLInputElement;
 
@@ -41,6 +46,7 @@
 		<span class="sr-only">search term</span>
 		<!-- svelte-ignore a11y_autofocus -->
 		<input
+			{autofocus}
 			autocomplete="off"
 			autocapitalize="none"
 			autocorrect="off"
