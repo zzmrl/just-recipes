@@ -1,7 +1,11 @@
 <script lang="ts">
 	import CloseIcon from './CloseIcon.svelte';
+	import SearchIcon from './SearchIcon.svelte';
 
 	interface Props {
+		/**
+		 * if true, automatically focus the input element
+		 */
 		autofocus?: boolean;
 	}
 
@@ -27,22 +31,7 @@
 			'focus-within:outline-none'
 		]}
 	>
-		<svg
-			class="h-[1.5em] w-[1.5em] opacity-50"
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 24 24"
-		>
-			<g
-				stroke-linejoin="round"
-				stroke-linecap="round"
-				stroke-width="2.5"
-				fill="none"
-				stroke="currentColor"
-			>
-				<circle cx="11" cy="11" r="8"></circle>
-				<path d="m21 21-4.3-4.3"></path>
-			</g>
-		</svg>
+		<SearchIcon class="h-[1.5em] opacity-50" />
 		<span class="sr-only">search term</span>
 		<!-- svelte-ignore a11y_autofocus -->
 		<input
@@ -60,10 +49,10 @@
 		/>
 		{#if value.length > 0}
 			<button
-				class="h-full cursor-pointer p-1 transition-colors hover:text-base-content/70"
+				class="h-full cursor-pointer p-1 text-base-content/70 transition-colors hover:text-base-content"
 				type="reset"
 			>
-				<CloseIcon class="h-[1em] w-[1em] opacity-50" />
+				<CloseIcon class="h-[1em] font-bold opacity-50" />
 			</button>
 		{/if}
 	</label>
