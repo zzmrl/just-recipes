@@ -2,6 +2,11 @@
 	import Search from './Search.svelte';
 </script>
 
+<svelte:head>
+	<title>Just Recipes</title>
+	<meta name="description" content="Find the best recipes." />
+</svelte:head>
+
 <div class="hero min-h-screen bg-base-200">
 	<div class="hero-content text-center">
 		<div class="max-w-xl">
