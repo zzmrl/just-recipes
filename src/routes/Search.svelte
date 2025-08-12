@@ -7,10 +7,13 @@
 		 * if true, automatically focus the input element
 		 */
 		autofocus?: boolean;
+		/**
+		 * the value of the input element
+		 */
+		value?: string;
 	}
 
-	const { autofocus }: Props = $props();
-	let value = $state('');
+	let { autofocus, value = $bindable('') }: Props = $props();
 	let inputElement: HTMLInputElement;
 
 	/**
@@ -22,17 +25,8 @@
 </script>
 
 <form action="/search" method="get" role="search" onreset={() => inputElement.focus()}>
-	<div class="join">
-		<label
-			class={[
-				'join-item',
-				'input',
-				'shadow-md',
-				'transition-shadow',
-				'focus-within:shadow-lg',
-				'focus-within:outline-none'
-			]}
-		>
+	<div class="join shadow-md transition-shadow focus-within:shadow-lg">
+		<label class="input join-item">
 			<SearchIcon class="h-[1.5em] opacity-50" />
 			<span class="sr-only">search term</span>
 			<!-- svelte-ignore a11y_autofocus -->
@@ -43,29 +37,20 @@
 				autocorrect="off"
 				type="text"
 				class="grow"
-				placeholder="blueberry muffins"
 				name="q"
 				minlength="1"
 				bind:value
 				bind:this={inputElement}
 			/>
-			{#if value.length > 0}
-				<button
-					class={[
-						'h-full',
-						'cursor-pointer',
-						'p-1',
-						'text-base-content/70',
-						'transition-colors',
-						'hover:text-base-content'
-					]}
-					type="reset"
-				>
-					<CloseIcon class="h-[1em] font-bold opacity-50" />
-				</button>
-			{/if}
+			<button
+				class={['btn', 'btn-ghost', 'btn-sm', 'btn-square']}
+				class:invisible={value.length === 0}
+				type="reset"
+			>
+				<span class="sr-only">clear search</span>
+				<CloseIcon class="h-[1.2em] opacity-50" />
+			</button>
 		</label>
-		<button class="btn btn-primary join-item" type="submit">Search</button>
+		<button class="btn join-item btn-primary" type="submit">Search</button>
 	</div>
-	
 </form>

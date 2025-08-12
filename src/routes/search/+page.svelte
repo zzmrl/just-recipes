@@ -108,7 +108,7 @@
 	);
 
 	// State for filters and sorting
-	let selectedDifficulty = $state('all');
+	let selectedDifficulty = $state<Difficulty>('all');
 	let selectedTags = $state<string[]>([]);
 	let sortBy = $state('relevance');
 	let loading = $state(false);
@@ -126,7 +126,8 @@
 		'italian',
 		'spicy'
 	];
-	const difficulties = ['Easy', 'Medium', 'Hard'];
+	const difficulties = ['Easy', 'Medium', 'Hard'] as const;
+	type Difficulty = 'all' | Lowercase<(typeof difficulties)[number]>;
 
 	// Apply filters and sorting
 	let displayedRecipes = $derived(
@@ -187,7 +188,7 @@
 			<div class="flex items-center justify-between">
 				<a href="/" class="text-2xl font-bold text-primary">Just Recipes</a>
 				<div class="w-96">
-					<Search />
+					<Search value={searchQuery} />
 				</div>
 			</div>
 		</div>
