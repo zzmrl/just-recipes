@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import Search from "../Search.svelte";
+  import Search from "../../lib/components/Search.svelte";
   import { onMount } from "svelte";
 
   // Mock recipe data - in a real app, this would come from an API
