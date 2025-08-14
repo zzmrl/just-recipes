@@ -1,9 +1,16 @@
 <script lang="ts">
-  let isDark = $state(JSON.parse(localStorage.getItem("isdark") || "false"));
+  import { onMount } from "svelte";
 
-  $effect(() => {
-    localStorage.setItem("isdark", JSON.stringify(isDark));
+  let isDark = $state(false);
+
+  onMount(() => {
+    isDark = JSON.parse(localStorage.getItem("isdark") || "false");
   });
+
+  export function toggleTheme() {
+    isDark = !isDark;
+    localStorage.setItem("isdark", JSON.stringify(isDark));
+  }
 </script>
 
 <label class="swap swap-rotate">
@@ -11,9 +18,7 @@
     type="checkbox"
     class="theme-controller"
     value="dark"
-    onchange={() => {
-      isDark = !isDark;
-    }}
+    bind:checked={() => isDark, () => toggleTheme()}
   />
 
   <!-- sun icon -->
