@@ -1,23 +1,19 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import { page, navigating } from "$app/state";
   import Navbar from "$lib/components/Navbar.svelte";
   import ThemeControl from "$lib/components/ThemeControl.svelte";
-  import Search from "../../lib/components/Search.svelte";
-  import { onMount } from "svelte";
+  import Search from "$lib/components/Search.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
 
-  // Get search query from URL
-  const searchQuery = page.url.searchParams.get("q") || "";
+  const searchQuery = $derived(page.url.searchParams.get("q") || "");
 
   // State for filters and sorting
   let selectedDifficulty = $state<Difficulty>("all");
   let selectedTags = $state<string[]>([]);
   let sortBy = $state("relevance");
-  let loading = $state(false);
 
-  // Available tags and difficulties
   const allTags = [
     "breakfast",
     "dinner",
@@ -31,7 +27,7 @@
     "spicy"
   ];
   const difficulties = ["Easy", "Medium", "Hard"] as const;
-  type Difficulty = "all" | Lowercase<(typeof difficulties)[number]>;
+  type Difficulty = "all" | (typeof difficulties)[number];
 
   // Apply filters and sorting
   const displayedRecipes = $derived(
@@ -70,14 +66,6 @@
     selectedTags = [];
     sortBy = "relevance";
   }
-
-  // Simulate loading state
-  onMount(() => {
-    loading = true;
-    setTimeout(() => {
-      loading = false;
-    }, 500);
-  });
 </script>
 
 <svelte:head>
@@ -185,7 +173,7 @@
 
     <!-- Recipe Grid -->
     <div class="lg:col-span-3">
-      {#if loading}
+      {#if navigating}
         <div class="flex h-64 items-center justify-center">
           <span class="loading loading-lg loading-spinner"></span>
         </div>
