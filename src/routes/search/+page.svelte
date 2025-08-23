@@ -3,6 +3,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
   import ThemeControl from "$lib/components/ThemeControl.svelte";
   import Search from "$lib/components/Search.svelte";
+  import { createSlug } from "$lib/recipes-api";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
@@ -13,6 +14,7 @@
   let selectedDifficulty = $state<Difficulty>("all");
   let selectedTags = $state<string[]>([]);
   let sortBy = $state("relevance");
+  let loading = $state(false);
 
   const allTags = [
     "breakfast",
@@ -173,7 +175,7 @@
 
     <!-- Recipe Grid -->
     <div class="lg:col-span-3">
-      {#if navigating}
+      {#if loading}
         <div class="flex h-64 items-center justify-center">
           <span class="loading loading-lg loading-spinner"></span>
         </div>
@@ -229,7 +231,9 @@
                 </div>
 
                 <div class="card-actions justify-end">
-                  <button class="btn btn-sm btn-primary"> View Recipe </button>
+                  <a href="/recipes/{createSlug(recipe.title)}" class="btn btn-sm btn-primary">
+                    View Recipe
+                  </a>
                 </div>
               </div>
             </article>
