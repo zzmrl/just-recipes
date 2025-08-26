@@ -8,12 +8,16 @@
      */
     autofocus?: boolean;
     /**
-     * the value of the input element
+     * the text value of the input element
      */
     value?: string;
+    /**
+     * the URI to submit the search form to
+     */
+    action?: string;
   }
 
-  let { autofocus, value = $bindable("") }: Props = $props();
+  let { autofocus, value = $bindable(""), action }: Props = $props();
   let inputElement: HTMLInputElement;
 
   /**
@@ -24,7 +28,7 @@
   }
 </script>
 
-<form action="/search" method="get" role="search" onreset={() => inputElement.focus()}>
+<form {action} method="get" role="search" onreset={() => inputElement.focus()}>
   <div class="join shadow-md transition-shadow focus-within:shadow-lg">
     <label class="input join-item">
       <SearchIcon class="h-[1.5em] opacity-50" />

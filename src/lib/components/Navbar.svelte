@@ -4,7 +4,7 @@
 
 <header class="navbar bg-base-200">
   <div class="container mx-auto px-4 py-1">
-    <div class="flex flex-wrap content-center items-center justify-between">
+    <div class="flex flex-wrap content-center items-center justify-between gap-2">
       {@render children()}
     </div>
   </div>

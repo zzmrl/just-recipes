@@ -3,13 +3,16 @@
   import ThemeControl from "$lib/components/ThemeControl.svelte";
   import Search from "$lib/components/Search.svelte";
   import type { PageData } from "./$types";
+  import { page } from "$app/state";
 
   let { data }: { data: PageData } = $props();
 
   const recipe = data.recipe;
 
+  const searchQuery = $derived(page.url.searchParams.get("q") || "");
+
   // State for ingredient checklist
-  let checkedIngredients = $state<Set<number>>(new Set());
+  let checkedIngredients = $state(new Set<number>());
 
   function toggleIngredient(index: number) {
     if (checkedIngredients.has(index)) {
@@ -63,7 +66,7 @@
     <a href="/" class="text-2xl font-bold text-primary">Just Recipes</a>
   </div>
   <div class="mx-auto inline-flex gap-4">
-    <Search value="" />
+    <Search value={searchQuery} action="/recipes" />
     <ThemeControl />
   </div>
 </Navbar>
@@ -74,7 +77,7 @@
   <div class="breadcrumbs mb-6 text-sm">
     <ul>
       <li><a href="/" class="link-hover">Home</a></li>
-      <li><a href="/search" class="link-hover">Recipes</a></li>
+      <li><a href="/recipes" class="link-hover">Recipes</a></li>
       <li class="text-base-content/70">{recipe.title}</li>
     </ul>
   </div>

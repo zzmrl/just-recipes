@@ -13,12 +13,12 @@
   <div></div>
   <ThemeControl />
 </Navbar>
-<div class="hero min-h-4/5">
+<div class="hero min-h-3/5">
   <main>
     <div class="hero-content text-center">
       <div class="max-w-xl">
         <h1 class="mb-6 text-5xl font-bold">Just Recipes</h1>
-        <Search autofocus />
+        <Search autofocus action="/recipes" />
       </div>
     </div>
   </main>

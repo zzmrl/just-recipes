@@ -77,17 +77,23 @@
 
 <!-- Header -->
 <Navbar>
-  <div class="grow pb-2 text-center sm:text-left">
+  <div class="grow text-center sm:pb-0 sm:text-left">
     <a href="/" class="text-2xl font-bold text-primary">Just Recipes</a>
   </div>
   <div class="mx-auto inline-flex gap-4">
-    <Search value={searchQuery} />
+    <Search value={searchQuery} action="/recipes" />
     <ThemeControl />
   </div>
 </Navbar>
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-8">
+  <div class="breadcrumbs mb-6 text-sm">
+    <ul>
+      <li><a href="/" class="link-hover">Home</a></li>
+      <li class="text-base-content/70">Recipes</li>
+    </ul>
+  </div>
   <!-- Search Results Header -->
   <div class="mb-8">
     {#if searchQuery}
